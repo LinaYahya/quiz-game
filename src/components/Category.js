@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from "react";
+import ReactLoading from 'react-loading';
 import { CategoryData, DifficultyData } from "../Data";
 import QuizForm from './QuizForm';
 
 function Category() {
-  const [cat, setCat] = useState("");
-  const [diff, setDiff] = useState("");
+  const [cat, setCat] = useState("9");
+  const [diff, setDiff] = useState("easy");
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(true);
   const [error, setError] = useState(null);
-  useEffect(() => {
-    if (cat || diff) {
-      fetch(
-        `https://opentdb.com/api.php?amount=10&category=${cat}&difficulty=${diff}`
+
+
+  const getQuestions = (cat, diff) => {
+    setLoading(true);
+    fetch(
+      `https://opentdb.com/api.php?amount=10&category=${cat}&difficulty=${diff}`
       )
-        .then((res) => res.json())
-        .then(({ results }) => setQuestions(results))
-        .catch((error) => setError(error));
-    }
-  }, [cat, diff]);
+      .then((res) =>{
+        setLoading(false);
+        return res.json();
+      })
+      .then(({ results }) => setQuestions(results))
+      .catch((error) => setError(error));
+  }
 
   return (
     <>
+    {loading && <ReactLoading type="spinningBubbles" className="loading" />}
     {show &&
       <form
         className="form-container"
@@ -59,6 +66,7 @@ function Category() {
             className="submitBtn"
             type="submit"
             onClick={(e) => {
+              getQuestions(cat, diff);
               setShow(!show);
               e.preventDefault();
             }}
