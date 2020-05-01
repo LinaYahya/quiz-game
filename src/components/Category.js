@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { CategoryData, DifficultyData } from "./Data";
+import { CategoryData, DifficultyData } from "../Data";
+import QuizForm from './QuizForm';
 
 function Category() {
   const [cat, setCat] = useState("");
@@ -20,9 +21,9 @@ function Category() {
 
   return (
     <>
+    {show &&
       <form
         className="form-container"
-        style={{ display: show ? "block" : "none" }}
       >
         <div className="quation-type">
           <div className="type-container">
@@ -55,6 +56,7 @@ function Category() {
             </select>
           </div>
           <button
+            className="submitBtn"
             type="submit"
             onClick={(e) => {
               setShow(!show);
@@ -65,6 +67,9 @@ function Category() {
           </button>
         </div>
       </form>
+}
+      {!show& !error && <QuizForm questions={questions} />}
+      
     </>
   );
 }
