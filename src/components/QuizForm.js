@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function Quizform({ questions }) {
   const [answer, setAnswer] = useState("");
@@ -16,23 +16,7 @@ function Quizform({ questions }) {
   ]);
   const [result, setResult] = useState(0);
   const [display, setDisplay] = useState(true);
-
-  useEffect(() => {
-    for (let i = 0; i <= 10; i++) {
-      const inputs = document.querySelectorAll(`.questions${i}`);
-      inputs.forEach((e) => {
-        if (e.checked) {
-          e.parentNode.style.background = 'rgb(114, 52, 95)';
-          e.parentNode.style.color = "white";
-
-        } else {
-          e.parentNode.style.background = "white";
-          e.parentNode.style.color = "black";
-        }
-      });
-    }
-  }, [answers]);
-
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
     setDisplay(false);
@@ -46,6 +30,26 @@ function Quizform({ questions }) {
       e.target.value,
       ...answers.slice(index + 1),
     ]);
+    const inputs = document.querySelectorAll(`.questions${index}`);
+    inputs.forEach((e) => {
+      e.disabled=true;
+      e.parentNode.style.cursor = "not-allowed";
+      if (e.checked) {
+        if (e.value === "correct") {
+          e.parentNode.style.background = "green";
+          e.parentNode.style.color = "white";
+        } else {
+          e.parentNode.style.background = "red";
+        }
+      } else {
+        if (e.value === "correct") {
+          e.parentNode.style.background = "green";
+          e.parentNode.style.color = "white";
+        } else {
+          e.parentNode.style.background = "white";
+        }
+      }
+    });
   };
   return (
     <>
