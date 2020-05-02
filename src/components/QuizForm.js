@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 function Quizform({ questions }) {
-  const [answer, setAnswer] = useState("");
   const [answers, setAnswers] = useState([
     "",
     "",
@@ -16,7 +15,7 @@ function Quizform({ questions }) {
   ]);
   const [result, setResult] = useState(0);
   const [display, setDisplay] = useState(true);
- 
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setDisplay(false);
@@ -24,7 +23,6 @@ function Quizform({ questions }) {
   };
 
   const handleChange = (e, index) => {
-    setAnswer(e.target.value);
     setAnswers([
       ...answers.slice(0, index),
       e.target.value,
@@ -32,7 +30,7 @@ function Quizform({ questions }) {
     ]);
     const inputs = document.querySelectorAll(`.questions${index}`);
     inputs.forEach((e) => {
-      e.disabled=true;
+      e.disabled = true;
       e.parentNode.style.cursor = "not-allowed";
       if (e.checked) {
         if (e.value === "correct") {
@@ -57,32 +55,25 @@ function Quizform({ questions }) {
         <form onSubmit={handleSubmit}>
           {questions.map((e, index) => (
             <div key={index}>
-              <p>{e.question}</p>
-
-              <div class="answers">
-                <label class="inputcontainer">
-                  <input
-                    className={`questions${index}`}
-                    type="radio"
-                    name={`answer${index}`}
-                    value="correct"
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                  {e.correct_answer}
-                </label>
-                {e.incorrect_answers.map((incorrect) => (
-                  <label class="inputcontainer">
-                    <input
-                      className={`questions${index}`}
-                      type="radio"
-                      name={`answer${index}`}
-                      value="incorrect"
-                      onChange={(e) => handleChange(e, index)}
-                    />
-                    {incorrect}
-                  </label>
-                ))}
-              </div>
+              <p>{e[0].question}</p>
+              {e.map((ele, i) => {
+                if (i !== 0) {
+                  return (
+                    <div class="answers">
+                      <label class="inputcontainer" key={index}>
+                        <input
+                          className={`questions${index}`}
+                          type="radio"
+                          name={`answer${index}`}
+                          value={ele[0]}
+                          onChange={(e) => handleChange(e, index)}
+                        />
+                        {ele[1]}
+                      </label>
+                    </div>
+                  );
+                }
+              })}
             </div>
           ))}
           <input type="submit" value="Submit" className="submitBtn" />
