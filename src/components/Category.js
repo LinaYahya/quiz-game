@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CategoryData, DifficultyData } from "../Data";
-import QuizForm from './QuizForm';
+import QuizForm from "./QuizForm";
+import rightImage from "../img/1610-Brain-Games-Study-workout.jpg";
 
 function Category() {
   const [cat, setCat] = useState("");
@@ -21,55 +22,61 @@ function Category() {
 
   return (
     <>
-    {show &&
-      <form
-        className="form-container"
-      >
-        <div className="quation-type">
-          <div className="type-container">
-            <label htmlFor="category">Select category: </label>
-            <select
-              id="category"
-              name={cat}
-              onChange={(e) => setCat(e.target.value)}
-            >
-              {CategoryData.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
-          </div>
+      {show && (
+        <div className="category-container">
+          <img className="left-img" src={rightImage} alt="brain Games" />
+          <div className="rightside">
+            <h2 className="title">
+              Have your quiz right now!
+              <span> select category and difffuculty of your quiz</span>
+            </h2>
+            <form className="form-container">
+              <div className="quation-type">
+                <div className="type-container">
+                  <label htmlFor="category">Select category: </label>
+                  <select
+                    id="category"
+                    name={cat}
+                    onChange={(e) => setCat(e.target.value)}
+                  >
+                    {CategoryData.map((cat) => (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-          <div className="type-container">
-            <label htmlFor="difficulty"> select difficulty</label>
-            <select
-              id="difficulty"
-              name={diff}
-              onChange={(e) => setDiff(e.target.value)}
-            >
-              {DifficultyData.map((dif, index) => (
-                <option key={index} value={dif}>
-                  {dif}
-                </option>
-              ))}
-            </select>
+                <div className="type-container">
+                  <label htmlFor="difficulty"> select difficulty</label>
+                  <select
+                    id="difficulty"
+                    name={diff}
+                    onChange={(e) => setDiff(e.target.value)}
+                  >
+                    {DifficultyData.map((dif, index) => (
+                      <option key={index} value={dif}>
+                        {dif}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <button
+                  className="submitBtn"
+                  type="submit"
+                  onClick={(e) => {
+                    setShow(!show);
+                    e.preventDefault();
+                  }}
+                >
+                  Go To Questions{" "}
+                </button>
+              </div>
+            </form>
           </div>
-          <button
-            className="submitBtn"
-            type="submit"
-            onClick={(e) => {
-              setShow(!show);
-              e.preventDefault();
-            }}
-          >
-            Go To Questions{" "}
-          </button>
         </div>
-      </form>
-}
-      {!show& !error && <QuizForm questions={questions} />}
-      
+      )}
+      {!show & !error && <QuizForm questions={questions} />}
     </>
   );
 }

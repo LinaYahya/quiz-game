@@ -10,59 +10,70 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "PT Sans";
+  font-family: "Kalam", cursive;
   font-weight: 400;
   transition: 0.2s;
 }
-.body {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("./img/background.jpg") no-repeat center center;
+.category-container {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+}
+.left-img {
+  width: 50%;
+}
+.rightside {
+  width: 50%;
+  background: rgb(241, 241, 213);
+}
 
-  /* background-repeat: no-repeat; */
-  background-size: cover;
-  /* height: 100vh; */
-  color: white;
+.title {
+  width: 60%;
+  margin: 10% auto 5%;
+  color: blue;
+  font-size: 19px;
+  font-weight: bold;
+}
+.title span {
+  font-size: 17px;
+  color: rgb(74, 74, 240);
 }
 .form-container {
-  position: absolute;
-  right: 90px;
-  margin: 150px;
-  box-shadow: 1px 5px 14px 2px #0b0d0c;
-  width: 400px;
+  width: 60%;
+  margin: 5% auto;
+  box-shadow: 1px 5px 14px 2px #eef08a;
   padding: 20px;
   border-radius: 12px;
-  color: #eae0ea;
-}
-.quation-type {
-  margin: 9%;
-}
-
-.type-container {
-  display: flex;
-  margin: 8%;
+  background: white;
+  color: blue;
 }
 .quation-type label {
-  width: 75%;
-  margin-top: 10px;
+  font-size: 15px;
+  font-weight: bold;
 }
 #category,
 #difficulty {
-  margin: 1%;
+  font-size: 13px;
+  margin: 5% auto;
   width: 90%;
   padding: 8px 15px;
-  font-size: 16px;
   border-radius: 8px;
   border: none;
+  outline: none;
+  color: blue;
+  background: rgba(255, 255, 0, 0.534);
 }
 .submitBtn {
   width: 200px;
-  border: 2px solid #595959;
+  font-weight: bold;
   border-radius: 8px;
+  font-size: 17px;
   height: 40px;
-  color: #ffffff;
-  background-color: #595959;
+  color: blue;
+  background-color: yellow;
   cursor: pointer;
-  letter-spacing: 2px;
+  outline: none;
+  border: none;
 }
 
 .submitBtn:hover {
@@ -99,6 +110,6 @@
   opacity: 0;
 }
 
-.hi:checked + .inputcontainer{
+.hi:checked + .inputcontainer {
   background: red;
 }
