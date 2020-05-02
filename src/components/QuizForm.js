@@ -50,9 +50,11 @@ function Quizform({ questions }) {
   return (
     <>
       {display && (
-        <form onSubmit={handleSubmit}>
+        <div className="questions-container">
+          <br/>
+        <form onSubmit={handleSubmit} className="questions-form">
           {questions.map((e, index) => (
-            <div key={index}>
+            <div className="question" key={index}>
               <p>{e.question}</p>
 
               <div class="answers">
@@ -83,6 +85,7 @@ function Quizform({ questions }) {
           ))}
           <input type="submit" value="Submit" className="submitBtn" />
         </form>
+        </div>
       )}
       {!display && <div> Your Result {result}</div>}
     </>

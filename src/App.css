@@ -80,20 +80,41 @@
   color: #ffffff;
   background-color: transparent;
 }
-
+.questions-container {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.185),
+      rgba(255, 255, 255, 0.185)
+    ),
+    url("./img/BrainGames-a26ca871.jpeg") repeat;
+  width: 100%;
+}
+.questions-form {
+  width: 50%;
+  margin-left: 25%;
+}
+.question {
+  margin: 10% auto;
+  padding: 5% 0;
+  box-shadow: 14px 15px 30px 4px #eef08a;
+  border-radius: 12px;
+  background: white;
+}
+.question:hover {
+  transform: scale(1.1);
+}
 .answers {
   display: flex;
   flex-wrap: wrap;
-  width: 50%;
   margin: 10px auto;
 }
 
 .inputcontainer {
+  border: 1px solid black;
   background: white;
   padding: 3px;
   width: 200px;
   border-radius: 22px;
-  margin: 5px;
+  margin: 5px auto;
   cursor: pointer;
   display: inline-block;
   color: black;
@@ -108,8 +129,4 @@
 .inputcontainer input {
   position: absolute;
   opacity: 0;
-}
-
-.hi:checked + .inputcontainer {
-  background: red;
 }
