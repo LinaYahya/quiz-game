@@ -63,10 +63,11 @@ function Quizform({ questions }) {
             {questions.map((e, index) => (
               <div className="question" key={index}>
                 <p>{e[0].question}</p>
-                <div className="answers">
                   {e.map((ele, i) => {
                     if (i !== 0) {
                       return (
+                        <div className="answers">
+
                         <label className="inputcontainer" key={index}>
                           <input
                             className={`questions${index}`}
@@ -77,11 +78,12 @@ function Quizform({ questions }) {
                           />
                           {ele[1]}
                         </label>
+                        </div>
+
                       );
                     }
                   })}
                 </div>
-              </div>
             ))}
             <input type="submit" value="Submit" className="submitBtn" />
           </form>
