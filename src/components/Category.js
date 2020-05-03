@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactLoading from "react-loading";
 import { CategoryData, DifficultyData } from "../Data";
 import QuizForm from "./QuizForm";
+import rightImage from "../img/1610-Brain-Games-Study-workout.jpg";
 
 function Category() {
   const [cat, setCat] = useState("9");
@@ -54,65 +55,80 @@ function Category() {
 
   return (
     <>
-      {loading && <ReactLoading type="spinningBubbles" className="loading" />}
+      {loading && <ReactLoading type="spinningBubbles" color="blue" className="loading" />}
       {show && (
-        <div className="rightside">
-        <h2 className="title">
-          Have your quiz right now!
-          <span> select category and difffuculty of your quiz</span>
-        </h2>
-        <form className="form-container">
-          <div className="quation-type">
-            <div className="type-container">
-              <label htmlFor="category">Select category: </label>
-              <select
-                id="category"
-                name={cat}
-                onChange={(e) => setCat(e.target.value)}
-              >
-                {CategoryData.map((cat) => (
-                  <option key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+        <div className="category-container">
+          <img className="left-img" src={rightImage} alt="brain Games" />
 
-            <div className="type-container">
-              <label htmlFor="difficulty"> select difficulty</label>
-              <select
-                id="difficulty"
-                name={diff}
-                onChange={(e) => setDiff(e.target.value)}
-              >
-                {DifficultyData.map((dif, index) => (
-                  <option key={index} value={dif}>
-                    {dif}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <button
-              className="submitBtn"
-              type="submit"
-              onClick={(e) => {
-                getQuestions(cat, diff);
-                setShowNotice(true);
-                setShow(false);
-                e.preventDefault();
-              }}
-            >
-              Go To Questions
-            </button>
+          <div className="rightside">
+            <h2 className="title">
+              Have your quiz right now!
+              <span> select category and difffuculty of your quiz</span>
+            </h2>
+            <form className="form-container">
+              <div className="quation-type">
+                <div className="type-container">
+                  <label htmlFor="category">Select category: </label>
+                  <select
+                    id="category"
+                    name={cat}
+                    onChange={(e) => setCat(e.target.value)}
+                  >
+                    {CategoryData.map((cat) => (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="type-container">
+                  <label htmlFor="difficulty"> select difficulty</label>
+                  <select
+                    id="difficulty"
+                    name={diff}
+                    onChange={(e) => setDiff(e.target.value)}
+                  >
+                    {DifficultyData.map((dif, index) => (
+                      <option key={index} value={dif}>
+                        {dif}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <button
+                  className="submitBtn"
+                  type="submit"
+                  onClick={(e) => {
+                    getQuestions(cat, diff);
+                    setShowNotice(true);
+                    setShow(false);
+                    e.preventDefault();
+                  }}
+                >
+                  Go To Questions
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
         </div>
       )}
       {showNotice & !loading ? (
-        <div>
-          <div>
+        <div className="msg-container">
+          <div className="msg-container__msg">
             Once you answer the question, you can't edit it, So take your time{" "}
           </div>
+          <button
+            className="submitBtn"
+            type="button"
+            onClick={(e) => {
+              setShow(true);
+              setShowNotice(false);
+            }}
+          >
+            {" "}
+            Back
+          </button>
           <button
             className="submitBtn"
             type="button"
@@ -124,20 +140,10 @@ function Category() {
             {" "}
             Start Quiz Now
           </button>
-          <button
-            className="submitBtn"
-            type="button"
-            onClick={(e) => {
-              setShow(true);
-              setShowNotice(false);
-            }}
-          >
-            {" "}
-            Back select category
-          </button>
+         
         </div>
       ) : null}
-      {!show & !error & !showNotice ? <QuizForm questions={questions}  /> : null}
+      {!show & !error & !showNotice ? <QuizForm questions={questions} /> : null}
     </>
   );
 }
