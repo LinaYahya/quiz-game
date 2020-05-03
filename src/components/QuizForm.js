@@ -34,6 +34,7 @@ function Quizform({ questions }) {
       e.parentNode.style.cursor = "not-allowed";
       if (e.checked) {
         if (e.value === "correct") {
+          setResult(result+1);
           e.parentNode.style.background = "green";
           e.parentNode.style.color = "white";
         } else {
@@ -51,16 +52,23 @@ function Quizform({ questions }) {
   };
   return (
     <>
+    <div>
+  <span>Total score {result}</span>
+      <span></span>
+
+    </div>
       {display && (
-        <form onSubmit={handleSubmit}>
+        <div className="questions-container">
+        <br/>
+        <form onSubmit={handleSubmit} className="questions-form">
           {questions.map((e, index) => (
-            <div key={index}>
+            <div className="question" key={index}>
               <p>{e[0].question}</p>
               {e.map((ele, i) => {
                 if (i !== 0) {
                   return (
-                    <div class="answers">
-                      <label class="inputcontainer" key={index}>
+                    <div className="answers">
+                      <label className="inputcontainer" key={index}>
                         <input
                           className={`questions${index}`}
                           type="radio"
@@ -78,6 +86,7 @@ function Quizform({ questions }) {
           ))}
           <input type="submit" value="Submit" className="submitBtn" />
         </form>
+        </div>
       )}
       {!display && <div> Your Result {result}</div>}
     </>

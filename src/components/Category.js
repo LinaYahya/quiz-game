@@ -9,9 +9,11 @@ function Category() {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(true);
+  const [showNotice, setShowNotice] = useState(false);
   const [error, setError] = useState(null);
 
-  const answers = (arr) =>
+  // // this function to handle the answers coming from the api so the correct and incorrect answers would be in one array
+  const handleAnswers = (arr) =>
     arr.map((e) => {
       const l = e.incorrect_answers.map((r) => {
         return ["incorrect", r];
@@ -19,16 +21,18 @@ function Category() {
       return [{ q: [["correct", e.correct_answer], ...l] }];
     });
 
-  const getRandomQuestions = (data, question, length) => {
-    let b = [];
+  // // this to reset the answers randomly so the correct answer wouldnt be at the same index
+  const randomArrayElements = (data, question, length) => {
+    let newArr = [];
     for (let i = 0; i < length; i++) {
       let num = Math.floor(Math.random() * question.length);
       let name = question[num];
-      b.push(name);
+      newArr.push(name);
       question.splice(num, 1);
     }
-    return [{ question: data.question }, ...b];
+    return [{ question: data.question }, ...newArr];
   };
+
   const getQuestions = (cat, diff) => {
     setLoading(true);
     fetch(
@@ -40,8 +44,8 @@ function Category() {
       })
 
       .then(({ results }) =>
-        answers(results).map((e, index) =>
-          getRandomQuestions(results[index], e[0].q, e[0].q.length)
+        handleAnswers(results).map((e, index) =>
+          randomArrayElements(results[index], e[0].q, e[0].q.length)
         )
       )
       .then((data) => setQuestions(data))
@@ -52,6 +56,11 @@ function Category() {
     <>
       {loading && <ReactLoading type="spinningBubbles" className="loading" />}
       {show && (
+        <div className="rightside">
+        <h2 className="title">
+          Have your quiz right now!
+          <span> select category and difffuculty of your quiz</span>
+        </h2>
         <form className="form-container">
           <div className="quation-type">
             <div className="type-container">
@@ -88,16 +97,47 @@ function Category() {
               type="submit"
               onClick={(e) => {
                 getQuestions(cat, diff);
-                setShow(!show);
+                setShowNotice(true);
+                setShow(false);
                 e.preventDefault();
               }}
             >
-              Go To Questions{" "}
+              Go To Questions
             </button>
           </div>
         </form>
+        </div>
       )}
-      {!show & !error && <QuizForm questions={questions} />}
+      {showNotice & !loading ? (
+        <div>
+          <div>
+            Once you answer the question, you can't edit it, So take your time{" "}
+          </div>
+          <button
+            className="submitBtn"
+            type="button"
+            onClick={(e) => {
+              setShow(false);
+              setShowNotice(false);
+            }}
+          >
+            {" "}
+            Start Quiz Now
+          </button>
+          <button
+            className="submitBtn"
+            type="button"
+            onClick={(e) => {
+              setShow(true);
+              setShowNotice(false);
+            }}
+          >
+            {" "}
+            Back select category
+          </button>
+        </div>
+      ) : null}
+      {!show & !error & !showNotice ? <QuizForm questions={questions}  /> : null}
     </>
   );
 }
