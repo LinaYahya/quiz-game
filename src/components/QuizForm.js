@@ -52,7 +52,7 @@ function Quizform({ questions }) {
   };
   return (
     <>
-      <div>
+      <div className="navRes">
         <span>Total score {result}</span>
         <span></span>
       </div>

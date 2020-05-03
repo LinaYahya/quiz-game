@@ -114,10 +114,21 @@ function Category() {
         </div>
       )}
       {showNotice & !loading ? (
-        <div>
-          <div>
+        <div className="msg-container">
+          <div className="msg-container__msg">
             Once you answer the question, you can't edit it, So take your time{" "}
           </div>
+          <button
+            className="submitBtn"
+            type="button"
+            onClick={(e) => {
+              setShow(true);
+              setShowNotice(false);
+            }}
+          >
+            {" "}
+            Back
+          </button>
           <button
             className="submitBtn"
             type="button"
@@ -129,17 +140,7 @@ function Category() {
             {" "}
             Start Quiz Now
           </button>
-          <button
-            className="submitBtn"
-            type="button"
-            onClick={(e) => {
-              setShow(true);
-              setShowNotice(false);
-            }}
-          >
-            {" "}
-            Back select category
-          </button>
+         
         </div>
       ) : null}
       {!show & !error & !showNotice ? <QuizForm questions={questions} /> : null}
