@@ -55,7 +55,7 @@ function Category() {
 
   return (
     <>
-      {loading && <ReactLoading type="spinningBubbles" className="loading" />}
+      {loading && <ReactLoading type="spinningBubbles" color="blue" className="loading" />}
       {show && (
         <div className="category-container">
           <img className="left-img" src={rightImage} alt="brain Games" />
