@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactLoading from "react-loading";
-import { CategoryData, DifficultyData, results } from "../Data";
+import { CategoryData, DifficultyData } from "../Data";
 import QuizForm from "./QuizForm";
 import rightImage from "../img/1610-Brain-Games-Study-workout.jpg";
 
@@ -100,9 +100,7 @@ function Category() {
                   className="submitBtn"
                   type="submit"
                   onClick={(e) => {
-                    setQuestions( handleAnswers(results).map((e, index) =>
-                    randomArrayElements(results[index], e[0].q, e[0].q.length)
-                  ));
+                    getQuestions(cat, diff);
                     setShowNotice(true);
                     setShow(false);
                     e.preventDefault();
