@@ -1,4 +1,5 @@
 # Quiz Game
+[have your Quiz now](https://quiz-game1.netlify.app/)
 ## What a quiz game ?
 a quiz from 10 questions the type of questions depends on the category and the difficulty you select when answering the question you can't edit the answer, you will get the score by every change.
 
