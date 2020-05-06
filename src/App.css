@@ -34,11 +34,11 @@
   width: 60%;
   margin: 10% auto 5%;
   color: blue;
-  font-size: 19px;
+  font-size: 21px;
   font-weight: bold;
 }
 .title span {
-  font-size: 17px;
+  font-size: 19px;
   color: rgb(74, 74, 240);
 }
 .form-container {
@@ -51,12 +51,12 @@
   color: blue;
 }
 .quation-type label {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: bold;
 }
 #category,
 #difficulty {
-  font-size: 13px;
+  font-size: 15px;
   margin: 5% auto;
   width: 90%;
   padding: 8px 15px;
